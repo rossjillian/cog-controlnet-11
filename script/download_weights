@@ -19,7 +19,7 @@ MODEL_PATHS = [
 ]
 
 for model in MODEL_PATHS:
-    hf_hub_download(repo_id=REPO, filename="%s.yaml" % model)
-    hf_hub_download(repo_id=REPO, filename="%s.pth" % model)
+    hf_hub_download(repo_id=REPO, filename="%s.yaml" % model, local_dir='./models')
+    hf_hub_download(repo_id=REPO, filename="%s.pth" % model, local_dir='./models')
 
-hf_hub_download(repo_id="runwayml/stable-diffusion-v1-5", filename="v1-5-pruned.ckpt")
+hf_hub_download(repo_id="runwayml/stable-diffusion-v1-5", filename="v1-5-pruned.ckpt", local_dir='./models')

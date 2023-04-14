@@ -6,6 +6,7 @@ import cv2
 import time
 import einops
 import random
+import os
 
 from pytorch_lightning import seed_everything
 from annotator.util import resize_image, HWC3
@@ -239,7 +240,8 @@ class Predictor(BasePredictor):
 
 def load_model(name):
     model = create_model(f'./models/{name}.yaml').cpu()
-    model.load_state_dict(load_state_dict('./models/v1-5-pruned.ckpt', location='cuda'), strict=False)
+    torch.load(os.path.abspath('./models/v1-5-pruned.ckpt'))
+    model.load_state_dict(load_state_dict(f'./models/v1-5-pruned.ckpt', location='cuda'), strict=False)
     model.load_state_dict(load_state_dict(f'./models/{name}.pth', location='cuda'), strict=False)
     model = model.cuda()
     return model
